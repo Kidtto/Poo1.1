@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminar Accesorio</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Eliminar Accesorio</h2>
+    <form action="procesar_eliminacion_accesorio.php" method="post">
+      <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+      <p>¿Estás seguro de que deseas eliminar este accesorio?</p>
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+      <a href="ver_accesorios.php" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

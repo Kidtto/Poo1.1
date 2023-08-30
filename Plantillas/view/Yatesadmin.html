@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administración de Yates</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Administración de Yates</h2>
+
+        
+        <form method="post" action="">
+            <input type="hidden" name="accion" value="eliminar">
+            <div class="form-group">
+                <label for="num_serie_eliminar">Número de Serie del Yate a Eliminar:</label>
+                <input type="text" class="form-control" id="num_serie_eliminar" name="num_serie_eliminar" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Eliminar Yate</button>
+        </form>
+
+        <hr>
+
+        
+        <h3>Editar Información de Yate</h3>
+        <form method="post" action="">
+            <input type="hidden" name="accion" value="editar">
+            <div class="form-group">
+                <label for="num_serie_editar">Número de Serie del Yate a Editar:</label>
+                <input type="text" class="form-control" id="num_serie_editar" name="num_serie_editar" required>
+            </div>
+            <div class="form-group">
+                <label for="nueva_informacion">Nueva Información:</label>
+                <input type="text" class="form-control" id="nueva_informacion" name="nueva_informacion" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Editar Información</button>
+        </form>
+    </div>
+</body>
+</html>
+

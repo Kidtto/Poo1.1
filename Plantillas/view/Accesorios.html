@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administración de Accesorios</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Administración de Accesorios</h2>
+
+        
+        <form method="post" action="">
+            <input type="hidden" name="accion" value="eliminar">
+            <div class="form-group">
+                <label for="id_eliminar">ID del Accesorio a Eliminar:</label>
+                <input type="text" class="form-control" id="id_eliminar" name="id_eliminar" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Eliminar Accesorio</button>
+        </form>
+
+        <hr>
+
+       
+        <h3>Editar Descripción de Accesorio</h3>
+        <form method="post" action="">
+            <input type="hidden" name="accion" value="editar">
+            <div class="form-group">
+                <label for="id_editar">ID del Accesorio a Editar:</label>
+                <input type="text" class="form-control" id="id_editar" name="id_editar" required>
+            </div>
+            <div class="form-group">
+                <label for="nueva_descripcion">Nueva Descripción:</label>
+                <input type="text" class="form-control" id="nueva_descripcion" name="nueva_descripcion" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Editar Descripción</button>
+        </form>
+    </div>
+</body>
+</html>
