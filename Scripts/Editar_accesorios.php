@@ -9,7 +9,7 @@ $precio = $_POST['precio'];
 $informacion = $_POST['informacion'];
 
 
-include('Accesorios.php'); 
+include('../Clases/Accesorios.php'); 
 
 
 $accesorios = new Accesorios($conexion);

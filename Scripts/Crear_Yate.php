@@ -1,9 +1,7 @@
 <?php
 
-require_once 'Yate.php';
+require_once '../Clases/Yates.php';
 
-
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
 
 
 $propietario = $_POST['propietario'];

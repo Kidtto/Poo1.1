@@ -1,10 +1,6 @@
 <?php
-require_once 'administrador.php'
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
-
-
+require_once '../Clases/Administrador.php';
 $nombreEspecialidad = $_POST['nombre'];
-
 
 $nombreEspecialidad = mysqli_real_escape_string($conexion, $nombreEspecialidad);
 
