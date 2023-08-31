@@ -13,15 +13,14 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title text-center">Eliminar Especialidad</h4>
-            <form action="procesar_eliminacion_especialidad.php" method="post">
+            <form action="../../Scripts/Eliminar_Especialidad.php" method="post">
               <div class="form-group">
                 <label for="especialidad">Seleccione la Especialidad a Eliminar:</label>
                 <select class="form-control" id="especialidad" name="especialidad" required>
                   <option value="">Seleccione una especialidad</option>
-                  <!-- Aquí debes generar las opciones desde la base de datos -->
-                  <option value="1">Especialidad 1</option>
+                 
                   <option value="2">Especialidad 2</option>
-                  <!-- ... -->
+                 
                 </select>
               </div>
               <button type="submit" class="btn btn-danger btn-block">Eliminar Especialidad</button>

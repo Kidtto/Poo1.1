@@ -2,11 +2,8 @@
 require_once '../Clases/conexion.php';
 require_once '../Clases/Accesorios.php';
 
-$conexion = mysqli_connect("localhost", "root", "", "yates");
-
-if (!$conexion) {
-    die("Error al conectar a la base de datos: " . mysqli_connect_error());
-}
+$conexionObj = new Conexion();
+$conexionObj->conect();
 
 $id = $_POST['id'];
 $propietario = $_POST['propietario'];

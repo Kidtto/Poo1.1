@@ -14,6 +14,7 @@ class Conexion {
         $this->username = "root";
         $this->password = "";
         $this->conexion = mysqli_connect("localhost", "root", "", "yates");
+        
     }
 
     public function conect() {

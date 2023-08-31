@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Administrador</a>
-        <!-- Resto de la barra de navegación -->
+
     </nav>
 
     <div class="container mt-4">
@@ -21,17 +21,7 @@
                     <th>Correo Electrónico</th>
             
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($usuariosRegistrados as $usuario) : ?>
-                    <tr>
-                        <td><?php echo $usuario['nombre']; ?></td>
-                        <td><?php echo $usuario['correo']; ?></td>
-                       
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+          
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

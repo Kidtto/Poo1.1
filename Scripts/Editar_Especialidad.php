@@ -1,6 +1,7 @@
 <?php
-
-$conexion = mysqli_connect("localhost", "usuario", "", "");
+require_once '../Clases/conexion.php'
+$conexionObj = new Conexion();
+$conexionObj->conect();
 
 $nuevoNombre = $_POST['nombre'];
 

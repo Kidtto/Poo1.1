@@ -1,7 +1,6 @@
 <?php
 class Accesorios {
     private $conexion;
-    private $id;
     private $propietario;
     private $precio;
     private $informacion;
@@ -40,13 +39,14 @@ class Accesorios {
     }
 
     public function AgregarAccesorio($propietario, $precio, $informacion) {
+
         $conexion = new conexion();
         $propietario = mysqli_real_escape_string($this->conexion, $propietario);
         $precio = floatval($precio);
         $informacion = mysqli_real_escape_string($this->conexion, $informacion);
 
         $query = "INSERT INTO accesorios (propietario, precio, informacion) VALUES ('$propietario', $precio, '$informacion')";
-        $resultado = mysqli_query($this->conexion, $query);
+        $resultado = $conexion -> query($query);
 
         if ($resultado > 0) {
             echo "Accesorio creado exitosamente.";

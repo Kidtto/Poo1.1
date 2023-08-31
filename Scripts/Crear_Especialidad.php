@@ -5,17 +5,13 @@ require_once '../Clases/Administrador.php';
 $conexion = new conexion();
 $conexion->conect();
 $nombreEspecialidad = $_POST['nombre'];
-$nombreEspecialidad = mysqli_real_escape_string($conexion, $nombreEspecialidad);
-
+$nombreEspecialidad = mysqli_real_escape_string($conexion ->getConexion(), $nombreEspecialidad);
 $query = "INSERT INTO especialidades (nombre) VALUES ('$nombreEspecialidad')";
-
-$resultado = mysqli_query($conexion, $query);
-
+$resultado = $conexion ->query($query);
 if ($resultado) {
     echo "Especialidad creada exitosamente.";
 } else {
-    echo "Error al crear la especialidad: " . mysqli_error($conexion);
+    echo "Error al crear la especialidad: " . mysqli_error($conexion->getConexion());
 }
-
-mysqli_close($conexion);
+$conexion ->close();
 ?>
