@@ -1,5 +1,5 @@
 <?php
-
+require_once '/Clases/Administrador.php'
 $conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
 
 

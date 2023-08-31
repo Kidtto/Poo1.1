@@ -1,6 +1,7 @@
 <?php
 class Accesorios {
     private $conexion;
+    private $id;
     private $propietario;
     private $precio;
     private $informacion;
@@ -30,7 +31,9 @@ class Accesorios {
     }
 
    
-    public function __construct($propietario, $precio, $informacion) {
+    public function __construct($conexion, $id, $propietario, $precio, $informacion) {
+        $this->conexion = $conexion;
+        $this->id = $id;
         $this->propietario = $propietario;
         $this->precio = $precio;
         $this->informacion = $informacion;
@@ -84,22 +87,17 @@ class Accesorios {
     }
 
     public function editarAccesorio($id, $propietario, $precio, $informacion) {
-        $conexion = new conexion();
-        $id = mysqli_real_escape_string($this->conexion, $id);
-        $propietario = mysqli_real_escape_string($this->conexion, $propietario);
-        $precio = floatval($precio);
-        $informacion = mysqli_real_escape_string($this->conexion, $informacion);
-       
-
-        $query = "UPDATE accesorios SET propietario='$propietario', precio=$precio, informacion='$informacion' WHERE id=$id";
+        $query = "UPDATE accesorios SET propietario = '$propietario', precio = $precio, informacion = '$informacion' WHERE id = $id";
+    
         $resultado = mysqli_query($this->conexion, $query);
-
+    
         if ($resultado) {
-            echo "Accesorio actualizado exitosamente.";
+            return true;
         } else {
-            echo "Error al actualizar el accesorio: " . mysqli_error($this->conexion);
+            return false;
         }
     }
+    
 
     
     public function eliminarAccesorio($id) {
@@ -115,7 +113,7 @@ class Accesorios {
         }
     }
 }
-
+?>
 
 
 

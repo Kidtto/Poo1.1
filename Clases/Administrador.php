@@ -6,19 +6,20 @@ class Administrador {
     private $contraseña;
     private $rol = 2;
 
-    public function __construct($correo, $contraseña,$conexion) {
+    public function __construct($correo, $contraseña, $conexion) {
         $this->correo = $correo;
         $this->contraseña = $contraseña;
         $this->conexion = $conexion;
     }
+    
 
     
 
     public function verUsuariosRegistrados() {
-        $conexion = new  conexion();
+        $conexion = $this->conexion;
         $query = "SELECT * FROM usuarios";
-        $resultado = mysqli_query($this->conexion, $query);
-
+        $resultado = mysqli_query($conexion, $query);
+    
         if ($resultado && mysqli_num_rows($resultado) > 0) {
             echo "<h2>Usuarios Registrados</h2>";
             echo "<ul>";
@@ -30,19 +31,25 @@ class Administrador {
             echo "No se encontraron usuarios registrados.";
         }
     }
+    
 
     public function verTipoMantenimiento() {
-        $conexion = new  conexion();
+        $conexion = $this->conexion;
         $query = "SELECT * FROM tipos_mantenimiento";
-        $resultado = mysqli_query($this->conexion, $query);
-
+        $resultado = mysqli_query($conexion, $query);
+    
         if ($resultado && mysqli_num_rows($resultado) > 0) {
-            $tiposMantenimiento = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-            return $tiposMantenimiento;
+            echo "<h2>Tipos de Mantenimiento</h2>";
+            echo "<ul>";
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                echo "<li>ID: " . $fila['id'] . " - Nombre: " . $fila['nombre'] . "</li>";
+            }
+            echo "</ul>";
         } else {
-            return array(); 
+            echo "No se encontraron tipos de mantenimiento.";
         }
     }
+    
     public function verTipoCita() {
         $conexion = new  conexion();
         $query = "SELECT * FROM tipos_mantenimiento";

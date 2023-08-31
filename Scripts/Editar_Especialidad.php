@@ -1,6 +1,6 @@
 <?php
 
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
+$conexion = mysqli_connect("localhost", "usuario", "", "");
 
 $nuevoNombre = $_POST['nombre'];
 
@@ -8,7 +8,7 @@ $nuevoNombre = $_POST['nombre'];
 $idEspecialidad = $_POST['id']; 
 
 
-include('Administrador.php');
+include('../Clases/Administrador.php');
 
 
 $administrador = new Administrador($conexion);

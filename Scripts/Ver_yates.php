@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Yate.php';
+require_once '../Clases/Yate.php';
 
 
 $conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");

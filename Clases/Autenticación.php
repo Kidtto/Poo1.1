@@ -7,12 +7,12 @@ class Autenticacion {
     }
 
     public function iniciarSesion($correo, $contraseña) {
-        // Verificar las credenciales en la base de datos
+       
         $query = "SELECT * FROM usuarios WHERE correo = '$correo' AND contraseña = '$contraseña'";
         $resultado = mysqli_query($this->conexion, $query);
 
         if ($resultado && mysqli_num_rows($resultado) > 0) {
-            // Las credenciales son válidas, iniciar sesión
+       
             session_start();
             $_SESSION['correo'] = $correo;
             echo "Inicio de sesión exitoso. ¡Bienvenido!";
@@ -20,5 +20,13 @@ class Autenticacion {
             echo "Credenciales incorrectas. Intente nuevamente.";
         }
     }
+    public function estaAutenticado() {
+        return isset($_SESSION['correo']);
+    }
+    public function cerrarSesion() {
+        session_destroy();
+        echo "Sesión cerrada.";
+    }
+    
 }
 ?>

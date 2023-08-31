@@ -6,7 +6,7 @@ $conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos")
 $idEspecialidad = $_POST['especialidad'];
 
 
-include('Administrador.php'); 
+include('../Clases/Administrador.php'); 
 
 
 $administrador = new Administrador($conexion);

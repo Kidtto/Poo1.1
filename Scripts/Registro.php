@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Persona.php';
+require_once '../Clases/Persona.php';
 
 
 $nombre = $_POST['username'];

@@ -1,17 +1,21 @@
 <?php
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
+require_once '../Clases/conexion.php';
+require_once '../Clases/Accesorios.php';
 
-if (!$conexion) {
-    die("Error al conectar a la base de datos: " . mysqli_connect_error());
+$conexion = new Conexion();
+$propietario = $_POST['propietario'];
+$precio = $_POST['precio'];
+$informacion = $_POST['informacion'];
+$imagen = $_POST['imagen'];
+
+$accesorios = new Accesorios($conexion, $propietario, $precio, $informacion);
+
+
+$resultado = $accesorios->AgregarAccesorio();
+
+if ($resultado) {
+    echo "Accesorio agregado correctamente.";
+} else {
+    echo "Error al agregar el accesorio.";
 }
-
-$propietario = mysqli_real_escape_string($conexion, $_POST['propietario']);
-$precio = mysqli_real_escape_string($conexion, $_POST['precio']);
-$informacion = mysqli_real_escape_string($conexion, $_POST['informacion']);
-
-include('/Clases/Accesorios.php'); 
-
-$accesorios = new Accesorios($conexion);
-
-$accesorios->AgregarAccesorio($propietario, $precio, $informacion);
 ?>
