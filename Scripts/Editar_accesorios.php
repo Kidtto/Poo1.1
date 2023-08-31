@@ -13,6 +13,5 @@ $informacion = $_POST['informacion'];
 $accesorios = new Accesorios($conexion, $id, $propietario, $precio, $informacion);
 
 $resultado = $accesorios->editarAccesorio($id, $propietario, $precio, $informacion);
-
-mysqli_close($conexion);
+$conexion ->close();;
 ?>

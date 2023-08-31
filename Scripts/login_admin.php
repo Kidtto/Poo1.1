@@ -1,9 +1,10 @@
 <?php
 
-require_once 'Autenticacion.php';
-require_once 'Administrador.php'; 
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
+require_once '../Clases/Autenticacion.php';
+require_once '../Clases/Administrador.php'; 
 
+$conexion = new conexion();
+$conexion->conect();
 
 $correo = $_POST['email'];
 $contraseña = $_POST['password'];
@@ -11,7 +12,7 @@ $contraseña = $_POST['password'];
 
 $autenticacion = new Autenticacion($conexion);
 
-// Llamar al método iniciarSesion()
+
 $autenticacion->iniciarSesion($correo, $contraseña);
 
 
@@ -20,4 +21,5 @@ if (esAdministrador($correo, $conexion)) {
 } else {
     echo "<script>window.location.href = 'pagina_principal_cliente.php';</script>";
 }
+$conexion -> close()
 ?>

@@ -11,4 +11,5 @@ $id = $_POST['id'];
 $accesorios = new Accesorios($conexion);
 
 $accesorios->eliminarAccesorio($id);
+c$conexion ->close();
 ?>

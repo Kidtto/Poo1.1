@@ -1,5 +1,6 @@
 <?php
 require_once '/Clases/Administrador.php'
+require_once '../Clases/conexion.php'
 $conexionObj = new Conexion();
 $conexionObj->conect();
 
@@ -19,4 +20,5 @@ if ($resultado) {
 } else {
     echo "Error al actualizar la información del mecánico: " . mysqli_error($conexion);
 }
+$conexion ->close();
 ?>

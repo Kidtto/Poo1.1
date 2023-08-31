@@ -1,14 +1,13 @@
 <?php
 
 require_once '../Clases/Yate.php';
-
-
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
-
-
+require_once ' ../Clases/conexion.php'
+$conexion = new conexion();
+$conexion->conect();
 $yate = new Yate($conexion);
 
 $listaDeYates = $yate->obtenerYates();
+$conexion ->close()
 ?>
 
 <!DOCTYPE html>
@@ -31,3 +30,4 @@ $listaDeYates = $yate->obtenerYates();
     </ul>
 </body>
 </html>
+$conexion ->close()

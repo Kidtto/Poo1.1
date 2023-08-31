@@ -11,5 +11,5 @@ $nuevoNombre = $_POST['nuevoNombre'];
 $administrador = new Administrador($conexion);
 
 $administrador->editarTipoCita($idTipoCita, $nuevoNombre);
-
+$conexion ->close();
 ?>

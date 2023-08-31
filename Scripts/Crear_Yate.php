@@ -17,5 +17,5 @@ $yate = new Yate($conexion);
 
 $yate->crearYate($propietario, $precio, $informacion, $numeroSerie, $marca, $modelo);
 
-mysqli_close($conexion);
+$conexion ->close();;
 ?>

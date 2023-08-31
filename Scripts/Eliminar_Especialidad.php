@@ -1,7 +1,7 @@
 <?php
-
-$conexion = mysqli_connect("localhost", "usuario", "contraseña", "basededatos");
-
+require_once '../Clases/conexion.php'
+$conexion = new conexion();
+$conexion->conect();
 
 $idEspecialidad = $_POST['especialidad'];
 
@@ -13,4 +13,5 @@ $administrador = new Administrador($conexion);
 
 
 $administrador->eliminarEspecialidad($idEspecialidad);
+$conexion ->close();
 ?>
