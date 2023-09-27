@@ -29,7 +29,7 @@ $accesorios = Accesorios::verAccesorios();
   <ul class="list-group ">
     <a class="btn" href="../accesorios/Mostrar.php"><li class="list-group-item bg-dark text-white">Accesorios</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Sedes</li></a>
-    <a class="btn" href=""><li class="list-group-item bg-dark text-white">Yates</li></a>
+    <a class="btn" href="../yates/Ver.php"><li class="list-group-item bg-dark text-white">Yates</li></a>
     <a class="btn" href="../citas/Mostrar.php"><li class="list-group-item bg-dark text-white">Agendamiento</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Especialidades</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Mecanicos</li></a>

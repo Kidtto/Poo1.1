@@ -18,7 +18,7 @@ if (!$user == null) {
         echo "<script>window.location.href = '../administrador/index.php';</script>";
 
     }else{
-        echo "<script>window.location.href = '../../Vistas/Users/Inicio_users.html';</script>";
+        echo "<script>window.location.href = '../../Vistas/Users/Inicio_users.php';</script>";
     }
 }else {
     die("Credenciales incorrectas. Intente nuevamente.");
