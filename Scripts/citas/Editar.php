@@ -1,7 +1,16 @@
 <?php
-include_once 'Accesorios.php';
-$accesorios = Accesorios::verAccesorios();
+include 'Citas.php';
+require_once '../../Clases/conexion.php';
+
+$id = $_POST['id'];
+$cita = Citas::encontrarCita($id);
+
+$conexion = new conexion();
+$query = "SELECT MIN(mechanics.id) AS id, specialtys.specialty FROM mechanics INNER JOIN specialtys ON mechanics.id_specialty = specialtys.id GROUP BY id_specialty;";
+$resultado = $conexion->query($query);
+while ($fila = $resultado->fetch_assoc()) {$mecanicos[] = $fila;}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,30 +49,28 @@ $accesorios = Accesorios::verAccesorios();
   </div>
 </div>
 <div class="container mt-5">
-  <div class="row">
-    <a href="../../Vistas/Admin/Agregar_Accesorios.html" class="btn btn-success">Agregar accesorio</a>
-    <?php foreach ($accesorios as $accesorio) {?>
-        <div class="col-md-4 col-sm-12">
-            <div class="card text-white bg-primary">
-              <img class="card-img-top" src="../../<?php echo $accesorio['photo'] ?>" alt="Title">
-              <div class="card-body">
-                <h4 class="card-title"><?php echo $accesorio['name'] ?></h4>
-                <p class="card-text"><?php echo $accesorio['price'] ?></p>
-                <p class="card-text"><?php echo $accesorio['information'] ?></p>
-                <form action="../../Vistas/Admin/Editar_accesorio.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $accesorio['id'] ?>">
-                    <input type="submit" value="Editar" class="btn btn-success">
-                </form>
-                <form action="Eliminar.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $accesorio['id'] ?>">
-                    <input type="submit" value="Eliminar" class="btn btn-danger">
-                </form>
-              </div>
-            </div>
+<form action="Actualizar.php" method="POST">
+        <div class="mb-3 mt-3">
+          <label for="name" class="form-label">Fecha:</label>
+          <input value="<?php echo $cita['id'] ?>" type="hidden" class="form-control" id="name" name="id">
+          <input value="<?php echo $cita['date'] ?>" type="date" class="form-control" id="name" placeholder="Inserte nombre" name="fecha">
         </div>
-    <?php } ?>
-  </div>
+        <div class="mb-3 mt-3">
+          <label for="name" class="form-label">Hora:</label>
+          <input value="<?php echo $cita['hour'] ?>" type="time" class="form-control" id="name" placeholder="Inserte nombre" name="hora">
+        </div>
+        <label for="name" class="form-label mt-3">Tipo de servicio necesario:</label>
+        <select class="form-select" name="mecanico">
+          <?php
+          foreach ($mecanicos as $mecanico) {          
+          ?>
+          <option value="<?php echo $mecanico['id']; ?>"><?php echo $mecanico['specialty']; ?></option>
+          <?php
+          }
+          ?>
+        </select>
+        <button type="submit" class="btn btn-primary mt-4">Crear</button>
+      </form>
 </div>
-
 </body>
 </html>

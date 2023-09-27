@@ -1,15 +1,15 @@
 <?php
-
-require_once '../Clases/Conexion.php';
-require_once '../Clases/Accesorios.php';
-
-$conexion = new conexion();
-$conexion->conect();
+require_once 'Accesorios.php';
 
 $id = $_POST['id'];
 
-$accesorios = new Accesorios($conexion);
 
-$accesorios->eliminarAccesorio($id);
-$conexion ->close();
+
+$resultado = accesorios::eliminarAccesorio($id);
+
+if ($resultado) {
+    header("Location: Mostrar.php");
+} else {
+    echo "Error al agregar el accesorio.";
+}
 ?>

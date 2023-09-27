@@ -1,6 +1,6 @@
 <?php
-class Yate {
-    private $conexion;
+include_once "../../Clases/conexion.php";
+class Yates {
     private $propietario;
     private $precio;
     private $informacion;
@@ -8,13 +8,13 @@ class Yate {
     private $marca;
     private $modelo;
 
-    public function __construct($propietario, $precio, $informacion, $numeroSerie, $marca, $modelo) {
-        $this->propietario = $propietario;
-        $this->precio = $precio;
-        $this->informacion = $informacion;
-        $this->numeroSerie = $numeroSerie;
-        $this->marca = $marca;
-        $this->modelo = $modelo;
+    public function __construct($price,$information,$serie,$brand,$model) {
+        $this->propietario = 1;
+        $this->precio = $price;
+        $this->informacion = $information;
+        $this->numeroSerie = $serie;
+        $this->marca = $brand;
+        $this->modelo = $model;
     
     }
 
@@ -66,62 +66,71 @@ class Yate {
     public function setModelo($modelo) {
         $this->modelo = $modelo;
     }
-    public function crearYate($propietario, $precio, $informacion, $numeroSerie, $marca, $modelo) {
+    public function crearYate($price,$information,$serie,$brand,$model) {
         $conexion = new conexion();
         
-        $query = "INSERT INTO yates (propietario, precio, informacion, numero_serie, marca, modelo) VALUES ('$propietario', $precio, '$informacion', '$numeroSerie', '$marca', '$modelo')";
-        $resultado = mysqli_query($this->conexion, $query);
-
-        if ($resultado) {
-            echo "Yate creado y almacenado correctamente.";
-        } else {
-            echo "Error al crear el yate. Intente nuevamente.";
-        }
+        $query = "INSERT INTO `yachts`(`model`, `price`, `information`, `serie`, `photo`, `id_users`, `id_brands`) VALUES ('$model','$price','$information','$serie','public/images/p1.jpg','1','$brand')";
+        $conexion->conect();
+        $resultado = $conexion->query($query);
+        return $resultado;
     }
 
 
 
         public function obtenerYates() {
             $conexion = new conexion();
-            
-            $query = "SELECT * FROM yates";
-            $resultado = mysqli_query($this->conexion, $query);
-    
-            $yates = array();
-    
-            if ($resultado && mysqli_num_rows($resultado) > 0) {
-                while ($fila = mysqli_fetch_assoc($resultado)) {
-                    $yates[] = $fila;
-                }
-            }
-    
-            return $yates;
-        }
-    
- public function editarYate($idYate, $nuevoPropietario, $nuevoPrecio, $nuevaInformacion, $nuevoNumeroSerie, $nuevaMarca, $nuevoModelo) {
-    $conexion = new conexion();
-        
-        $query = "UPDATE yates SET propietario = '$nuevoPropietario', precio = $nuevoPrecio, informacion = '$nuevaInformacion', numero_serie = '$nuevoNumeroSerie', marca = '$nuevaMarca', modelo = '$nuevoModelo' WHERE id = $idYate";
-        $resultado = mysqli_query($this->conexion, $query);
+            $query = "SELECT * FROM yachts";
+            $resultado = $conexion->query($query);
 
-        if ($resultado) {
-            echo "Yate editado correctamente.";
-        } else {
-            echo "Error al editar el yate. Intente nuevamente.";
+            if ($resultado) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $accessories[] = $fila;
+                }
+                return $accessories;
+            } else {
+                return "Error al obtener los Accesorios: ";
+            }
         }
+
+        public function obtenerYate($id) {
+            $conexion = new conexion();
+            $query = "SELECT yachts.*, users.name as 'owner', brands.brand as 'brand' FROM yachts INNER JOIN users ON yachts.id_users = users.id INNER JOIN brands ON yachts.id_brands =brands.id WHERE yachts.id=$id;";
+            $resultado = $conexion->query($query);
+
+            if ($resultado) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $yate[] = $fila;
+                }
+                return $yate[0];
+            } else {
+                return "Error al obtener los Accesorios: ";
+            }
+        }
+    
+    public function editarYate($id,$price,$information,$serie,$brand,$model){
+        $sql = "UPDATE `yachts` SET `model`='$model',`price`='$price',`information`='$information',`serie`='$serie',`id_brands`='$brand' WHERE id=$id";
+        $conexion = new conexion();
+        $conexion->conect();
+        $resultado = $conexion->query($sql);
+        return $resultado;
     }
 
     
         
     public function eliminarYate($idYate) {
+            $query = "DELETE FROM yachts WHERE id = $idYate";
+            $conexion = new conexion();
+            $conexion->conect();
+            $resultado = $conexion->query($query);
+            return $resultado;
+    }
+
+    public function comprarYate($id) {
         $conexion = new conexion();
-            $query = "DELETE FROM yates WHERE id = $idYate";
-            $resultado = mysqli_query($this->conexion, $query);
-    
-            if ($resultado) {
-                echo "Yate eliminado correctamente.";
-            } else {
-                echo "Error al eliminar el yate. Intente nuevamente.";
-            }
-        }
+        $date = date("Y-m-d");
+        $query = "INSERT INTO `yacht_sales`(`date`, `id_payment_method`, `id_yachts`, `id_users`) VALUES ('$date','1','$id','42')";
+        $conexion->conect();
+        $resultado = $conexion->query($query);
+        return $resultado;
+    }
 }

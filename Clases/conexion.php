@@ -17,26 +17,19 @@ class Conexion {
     }
 
     public function conect() {
-        if (!$this->conexion) {
-            die("Error al conectar a la base de datos: " . mysqli_connect_error());
+        $this->conexion = new mysqli($this->host, $this->username, $this->password, $this->database);
+        if ($this->conexion->connect_error) {
+            die("Error de base de datos: ".$this->conexion->connect_error);
         }
     }
 
-    public function prepare($query) {
-        return $this->conexion->prepare($query);
+    public function close(){
+        $this->conexion->close();
     }
 
-    public function close() {
-        mysqli_close($this->conexion);
-    }
-
-    public function query($sql) {
+    public function query($sql){ 
         $query = $this->conexion->query($sql);
         return $query;
-    }
-
-    public function getConexion() {
-        return $this->conexion;
     }
 
 }

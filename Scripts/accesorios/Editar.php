@@ -1,17 +1,16 @@
 <?php
-require_once '../Clases/conexion.php';
-require_once '../Clases/Accesorios.php';
 
-$conexionObj = new Conexion();
-$conexionObj->conect();
+require_once 'Accesorios.php';
 
 $id = $_POST['id'];
-$propietario = $_POST['propietario'];
-$precio = $_POST['precio'];
-$informacion = $_POST['informacion'];
+$name = $_POST['name'];
+$price = $_POST['price'];
+$stock = $_POST['stock'];
+$information = $_POST['information'];
 
-$accesorios = new Accesorios($conexion, $id, $propietario, $precio, $informacion);
+$resultado = Accesorios::editarAccesorio($id, $name, $price, $stock, $information);
+if ($resultado){
+    header("location: Mostrar.php");
+}
 
-$resultado = $accesorios->editarAccesorio($id, $propietario, $precio, $informacion);
-$conexion ->close();;
 ?>

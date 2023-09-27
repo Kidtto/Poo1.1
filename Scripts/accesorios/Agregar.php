@@ -1,19 +1,18 @@
 <?php
-require_once '../Clases/conexion.php';
-require_once '../Clases/Accesorios.php';
+require_once 'Accesorios.php';
 
-$conexion = new Conexion();
-$propietario = $_POST['propietario'];
-$precio = $_POST['precio'];
-$informacion = $_POST['informacion'];
+$name = $_POST['name'];
+$price = $_POST['price'];
+$stock = $_POST['stock'];
+$information = $_POST['information'];
 
-$accesorios = new Accesorios($conexion, $propietario, $precio, $informacion);
+$accesorios = new Accesorios($name, $price, $stock, $information);
 
 
-$resultado = $accesorios->AgregarAccesorio($propietario, $precio, $informacion);
+$resultado = $accesorios->AgregarAccesorio($name, $price, $stock, $information);
 
 if ($resultado) {
-    echo "Accesorio agregado correctamente.";
+    header("Location: Mostrar.php");
 } else {
     echo "Error al agregar el accesorio.";
 }

@@ -1,6 +1,8 @@
 <?php
-include_once 'Accesorios.php';
-$accesorios = Accesorios::verAccesorios();
+
+require_once 'Yates.php';
+
+$yates = Yates::obtenerYates();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +29,7 @@ $accesorios = Accesorios::verAccesorios();
   </div>
   <div class="offcanvas-body">
   <ul class="list-group ">
-    <a class="btn" href="../accesorios/Mostrar.php"><li class="list-group-item bg-dark text-white">Accesorios</li></a>
+    <a class="btn" href="../yates/Mostrar.php"><li class="list-group-item bg-dark text-white">yates</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Sedes</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Yates</li></a>
     <a class="btn" href="../citas/Mostrar.php"><li class="list-group-item bg-dark text-white">Agendamiento</li></a>
@@ -35,27 +37,27 @@ $accesorios = Accesorios::verAccesorios();
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Mecanicos</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Usuarios</li></a>
     <a class="btn" href=""><li class="list-group-item bg-dark text-white">Marcas</li></a>
-    <a class="btn" href=""><li class="list-group-item bg-danger text-white">Cerrar Sesion</li></a>
+    <a class="btn" href="../autentificacion/cerrar_sesion.php"><li class="list-group-item bg-danger text-white">Cerrar Sesion</li></a>
   </ul>
   </div>
 </div>
 <div class="container mt-5">
   <div class="row">
-    <a href="../../Vistas/Admin/Agregar_Accesorios.html" class="btn btn-success">Agregar accesorio</a>
-    <?php foreach ($accesorios as $accesorio) {?>
-        <div class="col-md-4 col-sm-12">
+    <a href="../../Vistas/Admin/Crear_yates.php" class="btn btn-success">Agregar yate</a>
+    <?php foreach ($yates as $yate) {?>
+        <div class="col-md-4 col-sm-12 my-3">
             <div class="card text-white bg-primary">
-              <img class="card-img-top" src="../../<?php echo $accesorio['photo'] ?>" alt="Title">
+              <img class="card-img-top" src="../../<?php echo $yate['photo'] ?>" alt="Title">
               <div class="card-body">
-                <h4 class="card-title"><?php echo $accesorio['name'] ?></h4>
-                <p class="card-text"><?php echo $accesorio['price'] ?></p>
-                <p class="card-text"><?php echo $accesorio['information'] ?></p>
-                <form action="../../Vistas/Admin/Editar_accesorio.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $accesorio['id'] ?>">
+                <h4 class="card-title"><?php echo $yate['model'] ?></h4>
+                <p class="card-text"><?php echo $yate['price'] ?></p>
+                <p class="card-text"><?php echo $yate['information'] ?></p>
+                <form action="Editar.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $yate['id'] ?>">
                     <input type="submit" value="Editar" class="btn btn-success">
                 </form>
                 <form action="Eliminar.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $accesorio['id'] ?>">
+                    <input type="hidden" name="id" value="<?php echo $yate['id'] ?>">
                     <input type="submit" value="Eliminar" class="btn btn-danger">
                 </form>
               </div>

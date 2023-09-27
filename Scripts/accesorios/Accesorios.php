@@ -2,90 +2,78 @@
 include_once "../../Clases/conexion.php";
 
 class Accesorios {
-    private $conexion;
-    private $propietario;
+    private $nombre;
+    private $cantidad;
     private $precio;
     private $informacion;
-   
-    public function __construct($conexion, $propietario, $precio, $informacion) {
-        $conexion = $conexion;
-        $this->propietario = $propietario;
+
+    public function __construct($nombre, $cantidad, $precio, $informacion) {
+        $this->nombre = $nombre;
+        $this->cantidad = $cantidad;
         $this->precio = $precio;
         $this->informacion = $informacion;
     }
 
-    public function AgregarAccesorio($propietario, $precio, $informacion) {
+    public function AgregarAccesorio($name, $price, $stock, $information){
+        $query = "INSERT INTO `accessories`(`name`, `information`, `price`, `stock`, `photo`) VALUES ('$name','$information','$price','$stock','public/images/a2.jpg')";
         $conexion = new conexion();
-        $propietario = mysqli_real_escape_string($conexion, $propietario);
-        $precio = floatval($precio);
-        $informacion = mysqli_real_escape_string($conexion, $informacion);
-
-        $query = "INSERT INTO accesorios (propietario, precio, informacion) VALUES ('$propietario', $precio, '$informacion')";
-        $resultado = $conexion -> query($query);
-
-        if ($resultado > 0) {
-            echo "Accesorio creado exitosamente.";
-        } else {
-            echo "Error al crear el accesorio: " . mysqli_error($conexion);
-        }
+        $conexion->conect();
+        $resultado = $conexion->query($query);
+        return $resultado;
     }
 
     public function verAccesorios() {
         $conexion = new conexion();
-        $query = "SELECT * FROM accesorios";
+        $query = "SELECT * FROM accessories";
         $resultado = $conexion->query($query);
 
-        if ($resultado > 0 ) {
-            echo '<table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Propietario</th>
-                        <th>Precio</th>
-                        <th>Información</th>
-                      </tr>
-                    </thead>
-                    <tbody>';
-            while ($fila = mysqli_fetch_assoc($resultado)) {
-                echo '<tr>
-                        <td>' . $fila['id'] . '</td>
-                        <td>' . $fila['propietario'] . '</td>
-                        <td>' . $fila['precio'] . '</td>
-                        <td>' . $fila['informacion'] . '</td>
-                      </tr>';
+        if ($resultado) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $accessories[] = $fila;
             }
-            echo '</tbody>
-                  </table>';
+            return $accessories;
         } else {
-            echo "Error al obtener los accesorios: " . mysqli_error($conexion);
+            return "Error al obtener los Accesorios: ";
         }
     }
 
-    public function editarAccesorio($id, $propietario, $precio, $informacion) {
-        $query = "UPDATE accesorios SET propietario = '$propietario', precio = $precio, informacion = '$informacion' WHERE id = $id";
-    
-        $resultado = mysqli_query($conexion, $query);
-    
-        if ($resultado) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-
-    
-    public function eliminarAccesorio($id) {
+    public function editarAccesorio($id, $name, $price, $stock, $information) {
+        $query = "UPDATE `accessories` SET `name`='$name',`information`='$information',`price`='$price',`stock`='$stock' WHERE id = $id";
         $conexion = new conexion();
-        $id = mysqli_real_escape_string($conexion, $id);
-        $query = "DELETE FROM accesorios WHERE id = $id";
-        $resultado = mysqli_query($conexion, $query);
+        $conexion->conect();
+        $resultado = $conexion->query($query);
+        return $resultado;
+    }
+
+    public static function encontrarAccesorio($id) {
+        $conexion = new conexion();
+        $query = "SELECT * FROM accessories WHERE id = $id";
+        $resultado = $conexion->query($query);
 
         if ($resultado) {
-            echo "Accesorio eliminado exitosamente.";
+            while ($fila = $resultado->fetch_assoc()) {
+                $accessories[] = $fila;
+            }
+            return $accessories[0];
         } else {
-            echo "Error al eliminar el accesorio: " . mysqli_error($conexion);
+            return "Error al obtener los Accesorios: ";
         }
+    }
+    public function eliminarAccesorio($id) {
+        $query = "DELETE FROM `accessories` WHERE id = '$id'";
+        $conexion = new conexion();
+        $conexion->conect();
+        $resultado = $conexion->query($query);
+        return $resultado;
+    }
+
+    public function comprarAccesorio($id) {
+        $conexion = new conexion();
+        $date = date("Y-m-d");
+        $query = "INSERT INTO `accessories_sales`(`date`, `method`, `id_accesories`, `id_users`) VALUES ('$date','0','$id','42')";
+        $conexion->conect();
+        $resultado = $conexion->query($query);
+        return $resultado;
     }
 }
 ?>

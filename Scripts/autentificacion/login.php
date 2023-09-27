@@ -14,7 +14,12 @@ if (!$user == null) {
     session_start();
     $_SESSION['id'] = $user['id'];
     $_SESSION['id_rols'] = $user['id_rols'];
-    echo "<script>window.location.href = '../administrador/index.php';</script>";
+    if ($user['id_rols'] == 2) {
+        echo "<script>window.location.href = '../administrador/index.php';</script>";
+
+    }else{
+        echo "<script>window.location.href = '../../Vistas/Users/Inicio_users.html';</script>";
+    }
 }else {
     die("Credenciales incorrectas. Intente nuevamente.");
 }

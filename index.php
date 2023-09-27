@@ -1,10 +1,21 @@
+<?php
+require_once 'Clases/conexion.php';
+
+$conexion = new conexion();
+$query = "SELECT * FROM yachts";
+$resultado = $conexion->query($query);
+while ($fila = $resultado->fetch_assoc()) {$yates[] = $fila;}
+$query = "SELECT * FROM accessories";
+$resultado = $conexion->query($query);
+while ($fila = $resultado->fetch_assoc()) {$accesorios[] = $fila;}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdrenaMarine</title>
-    <link rel="shortcut icon" href="images/favicon.png" type="">
+    <link rel="shortcut icon" href="public/images/favicon.png" type="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <style>
@@ -13,7 +24,7 @@
   </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark px-5">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">AdrenaMarine</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -44,13 +55,13 @@
             <!-- The slideshow/carousel -->
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="images/p1.jpg" alt="Los Angeles" class="d-block w-100">
+                <img src="public/images/p1.jpg" alt="Los Angeles" class="d-block w-100">
               </div>
               <div class="carousel-item">
-                <img src="images/p2.jpg" alt="Chicago" class="d-block w-100">
+                <img src="public/images/p2.jpg" alt="Chicago" class="d-block w-100">
               </div>
               <div class="carousel-item">
-                <img src="images/p3.jpg" alt="New York" class="d-block w-100">
+                <img src="public/images/p3.jpg" alt="New York" class="d-block w-100">
               </div>
             </div>
           
@@ -64,65 +75,52 @@
           </div>
           <div class="container mt-5">
             <div class="col-12 text-center">
-                <h3>Conoce nuestros productos</h3>
+                <h3>Conoce nuestros Yates</h3>
             </div>
             <div class="row mt-5">
-                <div class="col-md-4 col-sm-12">
+              <?php
+              foreach ($yates as $yate) {
+              ?>
+                <div class="col-md-4 col-sm-12 my-3">
                     <div class="card text-white bg-dark">
-                      <img class="card-img-top" src="images/a1.jpg" alt="Title">
+                      <img class="card-img-top" src="<?php echo $yate['photo'] ?>" alt="Title">
                       <div class="card-body">
-                        <h4 class="card-title">Nombre</h4>
-                        <p class="card-text">$precio</p>
+                        <h4 class="card-title"><?php echo $yate['model'] ?></h4>
+                        <p class="card-text">$ <?php echo $yate['price'] ?></p>
+                        <form action="Scripts/yates/Comprar.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $yate['id'] ?>">
+                            <input type="submit" value="Comprar" class="btn btn-primary">
+                        </form>
                       </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="card text-white bg-dark">
-                      <img class="card-img-top" src="images/p2.jpg" alt="Title">
-                      <div class="card-body">
-                        <h4 class="card-title">Nombre</h4>
-                        <p class="card-text">$precio</p>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="card text-white bg-dark">
-                      <img class="card-img-top" src="images/a3.jpg" alt="Title">
-                      <div class="card-body">
-                        <h4 class="card-title">Nombre</h4>
-                        <p class="card-text">$precio</p>
-                      </div>
-                    </div>
-                </div>
+                <?php
+              }
+                ?>
+            </div>
+            <div class="col-12 text-center">
+                <h3>Conoce nuestros Accesorios</h3>
             </div>
             <div class="row mt-5">
-                <div class="col-md-4 col-sm-12">
+              <?php
+              foreach ($accesorios as $accesorio) {
+              ?>
+                <div class="col-md-4 col-sm-12 my-3">
                     <div class="card text-white bg-dark">
-                      <img class="card-img-top" src="images/p1.jpg" alt="Title">
+                      <img class="card-img-top" src="<?php echo $accesorio['photo'] ?>" alt="Title">
                       <div class="card-body">
-                        <h4 class="card-title">Nombre</h4>
-                        <p class="card-text">$precio</p>
+                        <h4 class="card-title"><?php echo $accesorio['name'] ?></h4>
+                        <p class="card-text">$ <?php echo $accesorio['price'] ?></p>
+                        <form action="Scripts/accesorios/Comprar.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $accesorio['id'] ?>">
+                            <input type="submit" value="Comprar" class="btn btn-primary">
+                        </form>
                       </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="card text-white bg-dark">
-                      <img class="card-img-top" src="images/a2.jpg" alt="Title">
-                      <div class="card-body">
-                        <h4 class="card-title">Nombre</h4>
-                        <p class="card-text">$precio</p>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="card text-white bg-dark">
-                      <img class="card-img-top" src="images/p3.jpg" alt="Title">
-                      <div class="card-body">
-                        <h4 class="card-title">Nombre</h4>
-                        <p class="card-text">$precio</p>
-                      </div>
-                    </div>
-                </div>
+                <?php
+              }
+                ?>
             </div>
           </div>
           <div class="mt-5 p-4 bg-dark text-white text-center">
